@@ -197,7 +197,8 @@ def install(repo: Path) -> int:
         return 2
     hook = hooks / "pre-commit"
     script = Path(__file__).resolve().relative_to(repo).as_posix()
-    hook.write_text(f"#!/bin/sh\npython \"{script}\" --staged || python3 \"{script}\" --staged\n", encoding="utf-8")
+    # Always LF: Git's sh can't run a hook whose shebang line ends in CRLF (Windows' default for write_text).
+    hook.write_bytes(f"#!/bin/sh\npython \"{script}\" --staged || python3 \"{script}\" --staged\n".encode("utf-8"))
     try:
         hook.chmod(0o755)
     except OSError:
