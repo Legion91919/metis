@@ -16,6 +16,21 @@ flowchart LR
   api -. explanation only .-> llm[Language model<br/>optional adapter]
 ```
 
+
+
+
+## Run it in GitHub Codespaces
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Legion91919/metis?quickstart=1)
+
+The dev container installs the SDKs, restores packages and runs every test once on first start. The same setup works locally with VS Code's Dev Containers extension.
+
+| What | Command | Port |
+|---|---|---|
+| API (Metis) | `ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS=http://0.0.0.0:5202 dotnet run --project src/Metis.Api` | 5202 |
+| Web app | `cd web && npm start -- --allowed-hosts .app.github.dev --allowed-hosts localhost` | 4202 |
+| All tests (same as CI) | `scripts/test-all.sh` | - |
+
 ## What it does (slice 1)
 - `GET /api/queue`: ranked open deals with score (0-100), top three signed movers, a one-paragraph reason, waiting hours and first-come-first-served position, stamped with a `criteriaVersion`.
 - `GET /api/criteria`: weights in use, their shares and the last refused edit, if any.
