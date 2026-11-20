@@ -1,6 +1,6 @@
 # 0001. Architecture style
 
-- Status: Accepted
+- Status: Accepted (code layout refined by ADR-0002: vertical slices around a pure rules engine)
 - Date: 2026-11-19
 
 ## Context

@@ -1,0 +1,30 @@
+{
+  "Scoring": {
+    "Weights": {
+      "LoanToValue": 30,
+      "DebtServiceCover": 20,
+      "SponsorTrackRecord": 25,
+      "AssetType": 15,
+      "Location": 10
+    },
+    "LoanToValue": { "Best": 0.55, "Worst": 0.80 },
+    "DebtServiceCover": { "Best": 1.6, "Worst": 1.0 },
+    "SponsorDealsForFullMarks": 12,
+    "AssetTypeScores": {
+      "Industrial": 1.0,
+      "Multifamily": 0.85,
+      "MixedUse": 0.6,
+      "Retail": 0.4,
+      "Office": 0.35,
+      "Hotel": 0.3,
+      "Land": 0.1
+    },
+    "LocationScores": {
+      "Harbourside": 1.0,
+      "Eastvale": 0.8,
+      "Millbrook": 0.7,
+      "Northgate": 0.6,
+      "OuterRing": 0.3
+    }
+  }
+}

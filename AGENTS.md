@@ -1,6 +1,9 @@
 # AGENTS.md
 
-Deal Triage: Harbourline's inbound loan applications are reviewed first-come-first-served, so strong deals wait behind weak ones.
+Metis ranks Harbourline's inbound loan applications. Today they are reviewed first-come-first-served, so strong deals wait behind weak ones.
+
+## What is live
+Slice 1: `GET /api/queue` (ranked, top-three movers, one-paragraph reason), `GET /api/criteria`, `POST/GET /api/applications`, Blocks Auth at `/auth`, Angular queue in `web/`. Weights in `src/Metis.Api/criteria.json` reload live. Port 5202.
 
 ## Read first
 Everything about this project lives in the hidden `.agentic/` folder.

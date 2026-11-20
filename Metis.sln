@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A37C40D6-938F-4DFE-9387-325691072792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metis.Api", "src\Metis.Api\Metis.Api.csproj", "{77464D1B-E86F-4E66-9699-8A2491A36EAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{893D44CE-45B6-47C7-9FA6-C9384CBA9D7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intake", "Intake", "{F85CD8CB-8092-4B89-8945-2DA5868FBB21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metis.Intake", "src\Modules\Intake\Metis.Intake\Metis.Intake.csproj", "{59A5B002-1823-441D-AC9B-3C9A54D73F5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Triage", "Triage", "{BC0EC456-8321-4F2C-A4CB-1BFAF3FCE5B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metis.Triage", "src\Modules\Triage\Metis.Triage\Metis.Triage.csproj", "{9AA5695F-154E-4628-A73A-59F0176D9941}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7FFB8F3B-43FB-4581-A920-E3389FE7B513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metis.Tests", "tests\Metis.Tests\Metis.Tests.csproj", "{68F2FCD5-A8BA-4A7A-9056-7F35B847E162}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77464D1B-E86F-4E66-9699-8A2491A36EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77464D1B-E86F-4E66-9699-8A2491A36EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77464D1B-E86F-4E66-9699-8A2491A36EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77464D1B-E86F-4E66-9699-8A2491A36EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59A5B002-1823-441D-AC9B-3C9A54D73F5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59A5B002-1823-441D-AC9B-3C9A54D73F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59A5B002-1823-441D-AC9B-3C9A54D73F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59A5B002-1823-441D-AC9B-3C9A54D73F5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA5695F-154E-4628-A73A-59F0176D9941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA5695F-154E-4628-A73A-59F0176D9941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA5695F-154E-4628-A73A-59F0176D9941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA5695F-154E-4628-A73A-59F0176D9941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68F2FCD5-A8BA-4A7A-9056-7F35B847E162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68F2FCD5-A8BA-4A7A-9056-7F35B847E162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68F2FCD5-A8BA-4A7A-9056-7F35B847E162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68F2FCD5-A8BA-4A7A-9056-7F35B847E162}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77464D1B-E86F-4E66-9699-8A2491A36EAB} = {A37C40D6-938F-4DFE-9387-325691072792}
+		{893D44CE-45B6-47C7-9FA6-C9384CBA9D7E} = {A37C40D6-938F-4DFE-9387-325691072792}
+		{F85CD8CB-8092-4B89-8945-2DA5868FBB21} = {893D44CE-45B6-47C7-9FA6-C9384CBA9D7E}
+		{59A5B002-1823-441D-AC9B-3C9A54D73F5E} = {F85CD8CB-8092-4B89-8945-2DA5868FBB21}
+		{BC0EC456-8321-4F2C-A4CB-1BFAF3FCE5B7} = {893D44CE-45B6-47C7-9FA6-C9384CBA9D7E}
+		{9AA5695F-154E-4628-A73A-59F0176D9941} = {BC0EC456-8321-4F2C-A4CB-1BFAF3FCE5B7}
+		{68F2FCD5-A8BA-4A7A-9056-7F35B847E162} = {7FFB8F3B-43FB-4581-A920-E3389FE7B513}
+	EndGlobalSection
+EndGlobal

@@ -20,21 +20,21 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Restore
+      - name: Restore (vendored Agentic.Blocks from eng/packages + nuget.org, see nuget.config)
         if: hashFiles('**/*.sln', '**/*.csproj') != ''
-        run: dotnet restore
+        run: dotnet restore Metis.sln
 
       - name: Build (warnings as errors)
         if: hashFiles('**/*.sln', '**/*.csproj') != ''
-        run: dotnet build --no-restore -c Release -warnaserror
+        run: dotnet build Metis.sln --no-restore -c Release -warnaserror
 
       - name: Format check
         if: hashFiles('**/*.sln', '**/*.csproj') != ''
-        run: dotnet format --verify-no-changes --no-restore
+        run: dotnet format Metis.sln --verify-no-changes --no-restore
 
       - name: Test with coverage
         if: hashFiles('**/*.sln', '**/*.csproj') != ''
-        run: dotnet test --no-build -c Release --collect:"XPlat Code Coverage" --results-directory TestResults
+        run: dotnet test Metis.sln --no-build -c Release --collect:"XPlat Code Coverage" --results-directory TestResults
 
       - name: Coverage gate (70% line, ratchet up over time)
         if: hashFiles('TestResults/**/coverage.cobertura.xml') != ''
@@ -50,6 +50,24 @@ jobs:
         run: |
           dotnet list package --vulnerable --include-transitive | tee vuln.txt
           ! grep -q "has the following vulnerable packages" vuln.txt
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Unit and component tests (Angular unit-test builder, Vitest + jsdom)
+        run: npm test
+      - name: Production build
+        run: npm run build
 
   safety:
     runs-on: ubuntu-latest

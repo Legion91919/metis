@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Agentic.Blocks.Core" Version="0.1.0" />
+    <PackageReference Include="Agentic.Blocks.Web" Version="0.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Metis.Tests" />
+  </ItemGroup>
+</Project>
