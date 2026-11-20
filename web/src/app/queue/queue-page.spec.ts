@@ -61,5 +61,50 @@ describe('QueuePage', () => {
     http.expectOne('/api/queue?take=50').flush(response);
   });
 
+  it('refreshes the queue on demand, showing the loading state while it fetches', async () => {
+    const fixture = TestBed.createComponent(QueuePage);
+    fixture.detectChanges();
+    http.expectOne('/api/queue?take=50').flush(response);
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const refresh = () => el.querySelector('.queue-head button') as HTMLButtonElement;
+    expect(refresh().textContent?.trim()).toBe('Refresh');
+    expect(refresh().disabled).toBe(false);
+
+    refresh().click();
+    fixture.detectChanges();
+    const req = http.expectOne('/api/queue?take=50');
+    expect(el.querySelector('table.queue')).toBeNull(); // stale ranks hidden while fetching
+    expect(el.querySelector('section[aria-busy="true"]')).not.toBeNull();
+    expect(refresh().disabled).toBe(true);
+    expect(refresh().getAttribute('aria-busy')).toBe('true');
+
+    const reranked = [response.items[1], response.items[0]].map((i, n) => ({ ...i, rank: n + 1 }));
+    req.flush({ ...response, criteriaVersion: '391b12db', items: reranked });
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(el.querySelector('tbody tr:first-child')?.textContent).toContain('Linden Row Apartments');
+    expect(refresh().disabled).toBe(false);
+  });
+
+  it('refetches the weights on refresh when the weights panel is open', async () => {
+    const fixture = TestBed.createComponent(QueuePage);
+    fixture.detectChanges();
+    http.expectOne('/api/queue?take=50').flush(response);
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    const weights = (w: number) => ({ version: 'v', lastReloadError: null, criteria: [{ key: 'Location', name: 'Location', weight: w, share: 1 }] });
+    (Array.from(el.querySelectorAll('button')).find(b => b.textContent?.includes('Weights in use')) as HTMLButtonElement).click();
+    http.expectOne('/api/criteria').flush(weights(10));
+    (el.querySelector('.queue-head button') as HTMLButtonElement).click();
+    http.expectOne('/api/queue?take=50').flush(response);
+    http.expectOne('/api/criteria').flush(weights(40));
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(el.querySelector('.strip')?.textContent).toContain('Location 40');
+  });
+
   afterEach(() => http.verify());
 });

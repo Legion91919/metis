@@ -8,7 +8,11 @@ import { money, summarise, viewStateFor } from './queue-logic';
   selector: 'app-queue-page',
   imports: [MoverChip],
   template: `
-    <h1>Today's queue <span class="muted">· ranked by criteria score, ties by arrival</span></h1>
+    <div class="queue-head">
+      <h1>Today's queue <span class="muted">· ranked by criteria score, ties by arrival</span></h1>
+      <button type="button" class="refresh" (click)="load()" [disabled]="state() === 'loading'"
+        [attr.aria-busy]="state() === 'loading'">{{ state() === 'loading' ? 'Refreshing…' : 'Refresh' }}</button>
+    </div>
     @switch (state()) {
       @case ('loading') {
         <section class="panel" style="text-align:left" aria-busy="true">
@@ -82,7 +86,10 @@ export class QueuePage implements OnInit {
     this.failed.set(false);
     this.data.set(null);
     this.api.queue().subscribe({
-      next: q => { this.data.set(q); this.expanded.set(q.items[0]?.applicationId ?? null); this.version.emit(q.criteriaVersion); },
+      next: q => {
+        this.data.set(q); this.expanded.set(q.items[0]?.applicationId ?? null); this.version.emit(q.criteriaVersion);
+        if (this.weightsOpen()) this.loadCriteria(); // keep the weights shown in step with the ranks
+      },
       error: () => this.failed.set(true),
     });
   }
@@ -91,6 +98,9 @@ export class QueuePage implements OnInit {
 
   toggleWeights(): void {
     this.weightsOpen.update(o => !o);
-    if (this.weightsOpen()) this.api.criteria().subscribe({ next: c => this.criteria.set(c), error: () => this.criteria.set(null) });
+    if (this.weightsOpen()) this.loadCriteria();
+  }
+  private loadCriteria(): void {
+    this.api.criteria().subscribe({ next: c => this.criteria.set(c), error: () => this.criteria.set(null) });
   }
 }

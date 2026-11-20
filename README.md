@@ -2,6 +2,16 @@
 
 Metis ranks Harbourline Lending's inbound loan applications by explainable lending criteria, so strong deals stop waiting behind weak ones. (Harbourline is a fictional lender; all data is invented.)
 
+## See it in action
+
+![Metis walkthrough: an analyst signs in, sees the deal queue ranked by criteria score with each deal's top three reasons, then the head of credit raises the Location weight in criteria.json and the queue re-ranks without a restart](docs/media/demo.gif)
+
+| Ranked queue | Top three reasons | Mobile |
+|---|---|---|
+| ![Ranked queue with top three movers per deal](docs/media/queue.png) | ![A deal expanded to show the reason for its rank](docs/media/reasons.png) | ![Mobile view of the queue](docs/media/mobile.png) |
+
+Full-quality video: [docs/media/demo.mp4](docs/media/demo.mp4). Recorded from the running app with `demo/` (`cd demo && npm install && npm run record`).
+
 ## Design at a glance
 **Brief.** Applications are reviewed first-come-first-served. Metis scores every open deal on five weighted criteria (loan-to-value, debt service cover, sponsor track record, asset type, location), ranks the queue and gives each rank a one-paragraph reason naming the three criteria that moved it most. Goal: top-decile deals reviewed within 24 hours.
 

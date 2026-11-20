@@ -1,0 +1,8 @@
+{
+  "start": [
+    { "name": "api", "cmd": "cp src/Metis.Api/criteria.json demo/criteria.demo.json && CriteriaFile=\"$PWD/demo/criteria.demo.json\" dotnet run --project src/Metis.Api --no-build", "env": { "ASPNETCORE_ENVIRONMENT": "Development", "ASPNETCORE_URLS": "http://localhost:5202", "DemoUsers__Password": "demo-only-passphrase" }, "ready": "http://localhost:5202/health/ready" },
+    { "name": "web", "cmd": "npm start -- --port 6202", "cwd": "web", "ready": "http://localhost:6202" }
+  ],
+  "url": "http://localhost:6202",
+  "viewport": { "width": 1280, "height": 800 }
+}
